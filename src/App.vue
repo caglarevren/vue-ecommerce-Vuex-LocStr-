@@ -1,30 +1,57 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+    <nav id="nav">
+        <router-link to="/" :class="{ active: $route.name === 'home' }"
+            >Home</router-link
+        >
+        <router-link to="/cart" :class="{ active: $route.name === 'cart' }"
+            >Cart</router-link
+        >
+    </nav>
+    <router-view />
 </template>
+<script>
+export default {
+    mounted() {
+        this.$store.commit('updateCartFromLocalStorage')
+    },
+}
+</script>
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
     color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+}
+html,
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+body {
+    background-color: rgb(245, 245, 245);
+}
+#nav {
+    padding: 10px;
+    width: 100%;
+    height: 30px;
+    background-color: white;
+    line-height: 30px;
+    a {
+        font-weight: bold;
+        color: darkgray;
+        text-decoration: none;
+        margin: 0 5px 0 5px;
+        font-size: 1.25rem;
+        &.active {
+            color: #2c3e50;
+        }
     }
-  }
+}
+.text-center {
+    text-align: center;
 }
 </style>
